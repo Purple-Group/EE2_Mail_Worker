@@ -66,6 +66,11 @@
             <artifactId>springfox-swagger-ui</artifactId>
             <version>3.0.0</version>
         </dependency>
+        <dependency>
+            <groupId>com.easybackend.shared</groupId>
+            <artifactId>backendshared</artifactId>
+            <version>1.0.0</version>
+        </dependency>
 
     </dependencies>
 
