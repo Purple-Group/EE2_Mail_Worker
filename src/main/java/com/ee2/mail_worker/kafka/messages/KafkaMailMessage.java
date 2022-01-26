@@ -8,8 +8,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class KafkaMailMessage {
-    private String targetID;
-    private String sourceID;
+    private String targetID; //
+    private String sourceID; // Mail_Worker
     private String subsystem;
     private String sessionOriginPlatformID;
     private String emailAddress;
