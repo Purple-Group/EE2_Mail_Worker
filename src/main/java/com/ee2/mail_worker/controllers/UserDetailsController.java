@@ -17,7 +17,7 @@ public class UserDetailsController {
 
     private final UserService userService;
 
-    @GetMapping(value = "/test", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+    @GetMapping(value = "/evictCachedUserDataByUserId", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     public String evictUserDetailsByUserId(@RequestParam long userId){
 
         String key = String.valueOf(userId);
