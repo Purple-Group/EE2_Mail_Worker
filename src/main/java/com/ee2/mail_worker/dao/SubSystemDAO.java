@@ -1,9 +1,8 @@
 package com.ee2.mail_worker.dao;
 
+import com.ee2.mail_worker.constants.CacheNames;
 import com.ee2.mail_worker.dao.entities.SubSystemEntity;
-import com.ee2.mail_worker.dao.entities.UsersEntity;
 import com.ee2.mail_worker.dao.repositories.SubSystemRepository;
-import com.ee2.mail_worker.dao.repositories.UserRepository;
 import com.ee2.mail_worker.exceptions.CannotRetrieveDataFromSourceException;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
-
+import org.springframework.cache.annotation.Cacheable;
 import java.util.Optional;
 
 @Service
@@ -24,7 +23,7 @@ public class SubSystemDAO{
     @Autowired
     RestTemplate restTemplate;
 
-    //    @Cacheable(value = CacheNames.USER_CACHE, key = "#userId")
+    @Cacheable(value = CacheNames.SUBSYSTEM_CACHE, key = "#subSystemId")
     public SubSystemEntity findById(Integer subSystemId) {
         //read from local database... if not found then call source and save local
         Optional<SubSystemEntity> subSystemEntity = subSystemRepository.findById(subSystemId);
@@ -34,14 +33,14 @@ public class SubSystemDAO{
         return subSystemEntity.get();
     }
 
-    //    @Override
+
 //    @CacheEvict(value = CacheNames.USER_CACHE, key = "#DTO.userId")
     public void save(SubSystemEntity subSystemEntity) {
         subSystemRepository.save(subSystemEntity);
     }
 
 
-    //    @Override
+
     public SubSystemEntity getDataFromSource(Integer subSystemId) throws CannotRetrieveDataFromSourceException {
         //get from source
         String fooResourceUrl = sourceUri + "/subSystemEntities/";

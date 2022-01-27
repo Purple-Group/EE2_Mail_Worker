@@ -8,6 +8,7 @@ import com.ee2.mail_worker.dto.request.EmailByTemplateByUserIDRequestDto;
 import com.ee2.mail_worker.kafka.messages.KafkaMailMessage;
 import com.ee2.mail_worker.kafka.messages.MailMessage;
 import com.google.gson.Gson;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -17,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.text.SimpleDateFormat;
 
 @Service
+@Slf4j
 public class MailProducer {
     Gson gson = new Gson();
 
@@ -29,6 +31,7 @@ public class MailProducer {
         String KEY = mailMessage.getOBID()+"";
         String json = gson.toJson(mailMessage);
         kafkaTemplate.send(KafkaTopics.TOPIC_MAIL_MQ, KEY,json);
+        log.info("Sent Mail: " + mailMessage.getMessageTemplate() + " UserID: " + mailMessage.getTargetID());
     }
     // @TrackExecutionTime
     @Transactional(transactionManager = "kafkaTransactionManager")

@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 @Slf4j
 @RequestMapping("/mail")
 @AllArgsConstructor
-public class MainServiceController {
+public class MailController {
     private final MailService mailService;
 
 
@@ -21,25 +21,24 @@ public class MainServiceController {
         return "Hello";
     }
 
-@PostMapping( value = "/emailByTemlateByUserID")
-public void EmailByTemlateByUserID( @RequestHeader(value="sessionID",  required = false) String sessionID,
-        @RequestBody EmailByTemplateByUserIDRequestDto emailByTemplateByUserIDRequestDto) throws MailRequestException {
+    @PostMapping(value = "/emailByTemlateByUserID")
+    public void EmailByTemlateByUserID(@RequestHeader(value = "sessionID", required = false) String sessionID,
+                                       @RequestBody EmailByTemplateByUserIDRequestDto emailByTemplateByUserIDRequestDto) throws MailRequestException {
 
-        if(sessionID != null){
-            try{
-                Integer sourceOriginPlatformID= Integer.valueOf(sessionID);
+        if (sessionID != null) {
+            try {
+                Integer sourceOriginPlatformID = Integer.valueOf(sessionID);
                 emailByTemplateByUserIDRequestDto.setSourceOriginPlatformID(sourceOriginPlatformID);
                 mailService.sendMailMessage(emailByTemplateByUserIDRequestDto);
-            }catch (NumberFormatException e){
-                log.error("SessionID: "+ sessionID+ " is not a vallid number");
+            } catch (NumberFormatException e) {
+                log.error("SessionID: " + sessionID + " is not a vallid number");
             }
-        }else{
+        } else {
 
-        mailService.sendMailMessage(emailByTemplateByUserIDRequestDto);
+            mailService.sendMailMessage(emailByTemplateByUserIDRequestDto);
         }
 
 
-
-}
+    }
 
 }

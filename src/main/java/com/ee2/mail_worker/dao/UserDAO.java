@@ -4,10 +4,10 @@ import com.ee2.mail_worker.constants.CacheNames;
 import com.ee2.mail_worker.dao.entities.UsersEntity;
 import com.ee2.mail_worker.dao.repositories.UserRepository;
 import com.ee2.mail_worker.exceptions.CannotRetrieveDataFromSourceException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -17,6 +17,7 @@ import org.springframework.web.client.RestTemplate;
 import java.util.Optional;
 
 @Service
+@Slf4j
 public class UserDAO {
     @Autowired
     private UserRepository userRepository;
@@ -56,6 +57,7 @@ public class UserDAO {
             // mongoEntity.setId(userId);
             //Leaving this out untill we have way to update user data that changed
 //            return userRepository.save(usersEntity);
+            log.info("Fetched data from Source for userId: " + userId);
             return usersEntity;
         } catch (RestClientException e) {
             throw new CannotRetrieveDataFromSourceException("Cannot access user data from source api: " + e);
