@@ -24,14 +24,14 @@ public class MailProducer {
     @Autowired
     private KafkaTemplate<String, String> kafkaTemplate;
 
-//    @Transactional(transactionManager = "kafkaTransactionManager")
+    @Transactional(transactionManager = "kafkaTransactionManager")
     public void sendMailMessage(KafkaMailMessage mailMessage){
         String KEY = mailMessage.getOBID()+"";
         String json = gson.toJson(mailMessage);
         kafkaTemplate.send(KafkaTopics.TOPIC_MAIL_MQ, KEY,json);
     }
     // @TrackExecutionTime
-//    @Transactional(transactionManager = "kafkaTransactionManager")
+    @Transactional(transactionManager = "kafkaTransactionManager")
     public void sendMailMessage(EmailByTemplateByUserIDRequestDto emailByTemplateByUserIDRequestDto, UserVo userVo){
         KafkaMailMessage messageDTO = new KafkaMailMessage();
         messageDTO.setTargetID(userVo.getUserId() + ":" + userVo.getCustomerCode());
@@ -39,6 +39,7 @@ public class MailProducer {
         messageDTO.setSessionOriginPlatformID(String.valueOf(emailByTemplateByUserIDRequestDto.getSourceOriginPlatformID()));
         messageDTO.setEmailAddress(userVo.getEmailAddress());
         messageDTO.setOBID(String.valueOf(userVo.getSubSystemID()));
+        messageDTO.setD2Sub("");
         messageDTO.setTLoc(userVo.getFirstName() + " " + userVo.getLastName());
         messageDTO.setSubject(emailByTemplateByUserIDRequestDto.getSubject());
         messageDTO.setMessageTemplate(emailByTemplateByUserIDRequestDto.getTemplate());

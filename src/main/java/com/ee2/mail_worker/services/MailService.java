@@ -44,10 +44,10 @@ public class MailService {
         UsersEntity usersEntity = userDAO.findById(emailByTemplateByUserIDRequestDto.getUserID());
         SubSystemEntity subSystemEntity = subSystemDAO.findById(usersEntity.getSubSystemId());
         UserDTO userDTO = UserDTO.builder()
-                .customerCode(usersEntity.getCustomerCode())
-                .email(usersEntity.getEmail())
-                .firstName(usersEntity.getFirstName())
-                .lastName(usersEntity.getLastName())
+                .customerCode(usersEntity.getCustomerCode().trim())
+                .email(usersEntity.getEmail().trim())
+                .firstName(usersEntity.getFirstName().trim())
+                .lastName(usersEntity.getLastName().trim())
                 .userID(usersEntity.getUserId())
                 .subSystem(subSystemEntity.getSubSystem())
                 .subSystemID(subSystemEntity.getSubSystemId())

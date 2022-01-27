@@ -1,5 +1,6 @@
 package com.ee2.mail_worker.dao;
 
+import com.ee2.mail_worker.constants.CacheNames;
 import com.ee2.mail_worker.dao.entities.UsersEntity;
 import com.ee2.mail_worker.dao.repositories.UserRepository;
 import com.ee2.mail_worker.exceptions.CannotRetrieveDataFromSourceException;
@@ -24,14 +25,15 @@ public class UserDAO {
     @Autowired
     RestTemplate restTemplate;
 
-    //    @Cacheable(value = CacheNames.USER_CACHE, key = "#userId")
+    @Cacheable(value = CacheNames.USER_CACHE, key = "#userId", unless = "#result == null", cacheManager = "cacheManager_ExpireIn1Day")
     public UsersEntity findById(Long userId) {
         //read from local database... if not found then call source and save local
-        Optional<UsersEntity> usersEntity = userRepository.findById(userId);
-        if (!usersEntity.isPresent()) {
-            return getDataFromSource(userId);
-        }
-        return usersEntity.get();
+//        Optional<UsersEntity> usersEntity = userRepository.findById(userId);
+//        if (!usersEntity.isPresent()) {
+//            return getDataFromSource(userId);
+//        }
+//        return usersEntity.get();
+        return getDataFromSource(userId);
     }
 
     //    @Override
@@ -52,7 +54,9 @@ public class UserDAO {
             BeanUtils.copyProperties(sourceEntity, usersEntity);
             usersEntity.setUserId(userId);
             // mongoEntity.setId(userId);
-            return userRepository.save(usersEntity);
+            //Leaving this out untill we have way to update user data that changed
+//            return userRepository.save(usersEntity);
+            return usersEntity;
         } catch (RestClientException e) {
             throw new CannotRetrieveDataFromSourceException("Cannot access user data from source api: " + e);
         }
