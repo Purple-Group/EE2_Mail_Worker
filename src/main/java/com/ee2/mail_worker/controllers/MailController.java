@@ -29,16 +29,15 @@ public class MailController {
             try {
                 Integer sourceOriginPlatformID = Integer.valueOf(sessionID);
                 emailByTemplateByUserIDRequestDto.setSourceOriginPlatformID(sourceOriginPlatformID);
-                mailService.sendMailMessage(emailByTemplateByUserIDRequestDto);
             } catch (NumberFormatException e) {
-                log.error("SessionID: " + sessionID + " is not a vallid number");
+                //Do nothing
             }
+
+            mailService.sendMailMessage(emailByTemplateByUserIDRequestDto);
         } else {
 
             mailService.sendMailMessage(emailByTemplateByUserIDRequestDto);
         }
 
-
     }
-
 }
