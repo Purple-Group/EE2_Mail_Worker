@@ -22,23 +22,22 @@ public class MailController {
     }
 
     @PostMapping(value = "/emailByTemlateByUserID")
-    public void EmailByTemlateByUserID(@RequestHeader(value = "sessionID", required = false) String sessionID,
+    public void EmailByTemlateByUserID(@RequestHeader(value = "sessionOriginPlatformID", required = false) String sessionOriginPlatformID,
                                        @RequestBody EmailByTemplateByUserIDRequestDto emailByTemplateByUserIDRequestDto) throws MailRequestException {
 
-        if (sessionID != null) {
+        if (sessionOriginPlatformID != null) {
             try {
-                Integer sourceOriginPlatformID = Integer.valueOf(sessionID);
+                Integer sourceOriginPlatformID = Integer.valueOf(sessionOriginPlatformID);
                 emailByTemplateByUserIDRequestDto.setSourceOriginPlatformID(sourceOriginPlatformID);
-                mailService.sendMailMessage(emailByTemplateByUserIDRequestDto);
             } catch (NumberFormatException e) {
-                log.error("SessionID: " + sessionID + " is not a vallid number");
+                //Do nothing
             }
+
+            mailService.sendMailMessage(emailByTemplateByUserIDRequestDto);
         } else {
 
             mailService.sendMailMessage(emailByTemplateByUserIDRequestDto);
         }
 
-
     }
-
 }
