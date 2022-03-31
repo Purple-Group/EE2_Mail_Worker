@@ -6,6 +6,7 @@ import com.ee2.mail_worker.dao.entities.SubSystemEntity;
 import com.ee2.mail_worker.dao.entities.UsersEntity;
 import com.ee2.mail_worker.dto.reply.UserDTO;
 import com.ee2.mail_worker.dto.reply.UserVo;
+import com.ee2.mail_worker.dto.request.EmailByTemplateByEmailRequestDto;
 import com.ee2.mail_worker.dto.request.EmailByTemplateByUserIDRequestDto;
 import com.ee2.mail_worker.kafka.producer.MailProducer;
 import lombok.AllArgsConstructor;
@@ -28,6 +29,7 @@ public class MailService {
 
         UsersEntity usersEntity = userDAO.findById(emailByTemplateByUserIDRequestDto.getUserID());
         SubSystemEntity subSystemEntity = subSystemDAO.findById(usersEntity.getSubSystemId());
+        String customerCode = (usersEntity.getCustomerCode() != null) ? usersEntity.getCustomerCode() : "null";
         UserDTO userDTO = UserDTO.builder()
                 .customerCode(usersEntity.getCustomerCode().trim())
                 .email(usersEntity.getEmail().trim())
@@ -40,7 +42,7 @@ public class MailService {
 
         UserVo userVo = UserVo.builder()
                 .userId(userDTO.getUserID())
-                .customerCode(userDTO.getCustomerCode())
+                .customerCode(customerCode)
                 .subSystem(userDTO.getSubSystem())
                 .emailAddress(userDTO.getEmail())
                 .subSystemID((int) userDTO.getSubSystemID())
@@ -52,4 +54,30 @@ public class MailService {
     }
 
 
+    public void sendMailMessageByEmail(EmailByTemplateByEmailRequestDto emailByTemplateByEmailRequestDto) {
+
+        Integer subsystemId = (emailByTemplateByEmailRequestDto.getSubsystemId() != null)? emailByTemplateByEmailRequestDto.getSubsystemId() : 1;
+        SubSystemEntity subSystemEntity = subSystemDAO.findById(subsystemId);
+        UserDTO userDTO = UserDTO.builder()
+                .customerCode("null")
+                .email(emailByTemplateByEmailRequestDto.getEmail().trim())
+                .firstName("")
+                .lastName("")
+                .userID(0L)
+                .subSystem(subSystemEntity.getSubSystem().trim())
+                .subSystemID(subSystemEntity.getSubSystemId())
+                .build();
+
+        UserVo userVo = UserVo.builder()
+                .userId(userDTO.getUserID())
+                .customerCode("null")
+                .subSystem(userDTO.getSubSystem())
+                .emailAddress(userDTO.getEmail())
+                .subSystemID((int) userDTO.getSubSystemID())
+                .firstName(userDTO.getFirstName())
+                .lastName(userDTO.getLastName())
+                .build();
+
+        mailProducer.sendMailMessage(emailByTemplateByEmailRequestDto, userVo);
+    }
 }
