@@ -31,7 +31,7 @@ public class MailService {
         SubSystemEntity subSystemEntity = subSystemDAO.findById(usersEntity.getSubSystemId());
         String customerCode = (usersEntity.getCustomerCode() != null) ? usersEntity.getCustomerCode() : "null";
         UserDTO userDTO = UserDTO.builder()
-                .customerCode(usersEntity.getCustomerCode().trim())
+                .customerCode(customerCode)
                 .email(usersEntity.getEmail().trim())
                 .firstName(usersEntity.getFirstName().trim())
                 .lastName(usersEntity.getLastName().trim())
