@@ -1,0 +1,479 @@
+{
+  "fields": [
+    {
+      "name": "tradeDTO",
+      "type": {
+        "fields": [
+          {
+            "name": "userID",
+            "type": "long"
+          },
+          {
+            "name": "roundDown",
+            "type": "boolean"
+          },
+          {
+            "name": "tradeFractions",
+            "type": "boolean"
+          },
+          {
+            "name": "transactionDateTime",
+            "type": {
+              "avro.java.string": "String",
+              "type": "string"
+            }
+          },
+          {
+            "name": "breakOrder",
+            "type": "boolean"
+          },
+          {
+            "name": "allowNegativeMovement",
+            "type": "boolean"
+          },
+          {
+            "name": "commissionAsLineItem",
+            "type": "boolean"
+          },
+          {
+            "name": "userLevelCommissionId",
+            "type": [
+              "long",
+              "null"
+            ]
+          },
+          {
+            "name": "priceLimit",
+            "type": [
+              "double",
+              "null"
+            ]
+          },
+          {
+            "name": "previousTransactionPositionActionID",
+            "type": [
+              "long",
+              "null"
+            ]
+          },
+          {
+            "name": "gtPrice",
+            "type": [
+              "double",
+              "null"
+            ]
+          },
+          {
+            "name": "totalTransactionCosts",
+            "type": [
+              "double",
+              "null"
+            ]
+          },
+          {
+            "name": "transactionStartTime",
+            "type": [
+              "long",
+              "null"
+            ]
+          },
+          {
+            "name": "lastTrailingPrice",
+            "type": [
+              "double",
+              "null"
+            ]
+          },
+          {
+            "name": "trailingValue",
+            "type": [
+              "double",
+              "null"
+            ]
+          },
+          {
+            "name": "trailingOrder",
+            "type": "boolean"
+          },
+          {
+            "name": "contractCode",
+            "type": {
+              "avro.java.string": "String",
+              "type": "string"
+            }
+          },
+          {
+            "name": "trustAccountID",
+            "type": "long"
+          },
+          {
+            "name": "instrumentID",
+            "type": "long"
+          },
+          {
+            "name": "instrumentName",
+            "type": [
+              {
+                "avro.java.string": "String",
+                "type": "string"
+              },
+              "null"
+            ]
+          },
+          {
+            "name": "tradingCurrencyName",
+            "type": [
+              {
+                "avro.java.string": "String",
+                "type": "string"
+              },
+              "null"
+            ]
+          },
+          {
+            "name": "traderName",
+            "type": [
+              {
+                "avro.java.string": "String",
+                "type": "string"
+              },
+              "null"
+            ]
+          },
+          {
+            "name": "tradeTag",
+            "type": [
+              {
+                "avro.java.string": "String",
+                "type": "string"
+              },
+              "null"
+            ]
+          },
+          {
+            "name": "instrumentShadedBid",
+            "type": [
+              "double",
+              "null"
+            ]
+          },
+          {
+            "name": "instrumentShadedOffer",
+            "type": [
+              "double",
+              "null"
+            ]
+          },
+          {
+            "name": "instrumentDisplayTickSize",
+            "type": [
+              "double",
+              "null"
+            ]
+          },
+          {
+            "name": "margin",
+            "type": [
+              "double",
+              "null"
+            ]
+          },
+          {
+            "name": "marginChange",
+            "type": [
+              "double",
+              "null"
+            ]
+          },
+          {
+            "name": "commissionLineItemAmount",
+            "type": [
+              "double",
+              "null"
+            ]
+          },
+          {
+            "name": "commissionShadingAmount",
+            "type": [
+              "double",
+              "null"
+            ]
+          },
+          {
+            "name": "trustAccountValue",
+            "type": [
+              "double",
+              "null"
+            ]
+          },
+          {
+            "name": "transactionId",
+            "type": "long"
+          },
+          {
+            "name": "transactionLogId",
+            "type": [
+              "long",
+              "null"
+            ]
+          },
+          {
+            "name": "errorTradeID",
+            "type": [
+              "long",
+              "null"
+            ]
+          },
+          {
+            "name": "orderPriceConditionID",
+            "type": [
+              "long",
+              "null"
+            ]
+          },
+          {
+            "name": "orderTypeID",
+            "type": [
+              "long",
+              "null"
+            ]
+          },
+          {
+            "name": "delayedPrice",
+            "type": [
+              "double",
+              "null"
+            ]
+          },
+          {
+            "name": "originalOrderPrice",
+            "type": [
+              "double",
+              "null"
+            ]
+          },
+          {
+            "name": "portfolioId",
+            "type": "long"
+          },
+          {
+            "name": "tradingCurrencyId",
+            "type": "long"
+          },
+          {
+            "name": "risk",
+            "type": [
+              "double",
+              "null"
+            ]
+          },
+          {
+            "name": "traderID",
+            "type": [
+              "long",
+              "null"
+            ]
+          },
+          {
+            "name": "traderUserRoleID",
+            "type": [
+              "int",
+              "null"
+            ]
+          },
+          {
+            "name": "transactionPrice",
+            "type": "double"
+          },
+          {
+            "name": "userShadedPrice",
+            "type": [
+              "double",
+              "null"
+            ]
+          },
+          {
+            "name": "amount",
+            "type": [
+              "double",
+              "null"
+            ]
+          },
+          {
+            "name": "pendingValueOrderCosts",
+            "type": [
+              "long",
+              "null"
+            ]
+          },
+          {
+            "name": "triggerOn",
+            "type": [
+              {
+                "avro.java.string": "String",
+                "type": "string"
+              },
+              "null"
+            ]
+          },
+          {
+            "name": "transactionReference",
+            "type": [
+              {
+                "avro.java.string": "String",
+                "type": "string"
+              },
+              "null"
+            ]
+          },
+          {
+            "name": "transactionTag",
+            "type": [
+              {
+                "avro.java.string": "String",
+                "type": "string"
+              },
+              "null"
+            ]
+          },
+          {
+            "name": "tradeAllocationID",
+            "type": [
+              "long",
+              "null"
+            ]
+          },
+          {
+            "name": "spreadPercentage",
+            "type": [
+              "double",
+              "null"
+            ]
+          },
+          {
+            "name": "platformID",
+            "type": [
+              "long",
+              "null"
+            ]
+          },
+          {
+            "name": "settlementDate",
+            "type": [
+              {
+                "avro.java.string": "String",
+                "type": "string"
+              },
+              "null"
+            ]
+          },
+          {
+            "name": "cashSettlementDate",
+            "type": [
+              {
+                "avro.java.string": "String",
+                "type": "string"
+              },
+              "null"
+            ]
+          },
+          {
+            "name": "BNDsettlementDate",
+            "type": [
+              {
+                "avro.java.string": "String",
+                "type": "string"
+              },
+              "null"
+            ]
+          },
+          {
+            "name": "trustAccountLogStatusId",
+            "type": [
+              "long",
+              "null"
+            ]
+          },
+          {
+            "name": "tradingCurrencyTypeId",
+            "type": [
+              "long",
+              "null"
+            ]
+          },
+          {
+            "name": "transactionPositionActionId",
+            "type": "int"
+          },
+          {
+            "name": "transactionPositionAction",
+            "type": [
+              {
+                "avro.java.string": "String",
+                "type": "string"
+              },
+              "null"
+            ]
+          },
+          {
+            "name": "transactionPositionActionTypeId",
+            "type": "int"
+          },
+          {
+            "name": "transactionPositionActionType",
+            "type": [
+              {
+                "avro.java.string": "String",
+                "type": "string"
+              },
+              "null"
+            ]
+          },
+          {
+            "name": "additionalTrustAccountMovementRequestDTO",
+            "type": [
+              {
+                "items": {
+                  "fields": [
+                    {
+                      "name": "financialMovementSourceID",
+                      "type": "long"
+                    },
+                    {
+                      "name": "amount",
+                      "type": "double"
+                    },
+                    {
+                      "name": "comment",
+                      "type": {
+                        "avro.java.string": "String",
+                        "type": "string"
+                      }
+                    },
+                    {
+                      "name": "trustAccountActionID",
+                      "type": "long"
+                    },
+                    {
+                      "name": "chargeID",
+                      "type": "int"
+                    }
+                  ],
+                  "name": "AdditionalTrustAccountMovementRequestDTO",
+                  "type": "record"
+                },
+                "type": "array"
+              },
+              "null"
+            ]
+          }
+        ],
+        "name": "TradeRequestDTO",
+        "type": "record"
+      }
+    }
+  ],
+  "name": "ClientTradeEventDTO",
+  "namespace": "com.purplegroup.avro",
+  "type": "record"
+}
