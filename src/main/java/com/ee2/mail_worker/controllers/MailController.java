@@ -26,6 +26,8 @@ public class MailController {
     public void EmailByTemlateByUserID(@RequestHeader(value = "sessionOriginPlatformID", required = false) String sessionOriginPlatformID,
                                        @RequestBody EmailByTemplateByUserIDRequestDto emailByTemplateByUserIDRequestDto) throws MailRequestException {
 
+        log.info("deprecate -emailByTemlateByUserID : request received on endpoint marked for depreciation");
+
         if (sessionOriginPlatformID != null) {
             try {
                 Integer sourceOriginPlatformID = Integer.valueOf(sessionOriginPlatformID);
@@ -45,6 +47,47 @@ public class MailController {
     @PostMapping(value = "/emailByTemlateByEmail")
     public void EmailByTemlateByEmail(@RequestHeader(value = "sessionOriginPlatformID", required = false) String sessionOriginPlatformID,
                                        @RequestBody EmailByTemplateByEmailRequestDto emailByTemplateByEmailRequestDto) throws MailRequestException {
+        log.info("deprecate -emailByTemlateByEmail : request received on endpoint marked for depreciation");
+
+        if (sessionOriginPlatformID != null) {
+            try {
+                Integer sourceOriginPlatformID = Integer.valueOf(sessionOriginPlatformID);
+                emailByTemplateByEmailRequestDto.setSourceOriginPlatformID(sourceOriginPlatformID);
+            } catch (NumberFormatException e) {
+                //Do nothing
+            }
+
+            mailService.sendMailMessageByEmail(emailByTemplateByEmailRequestDto);
+        } else {
+
+            mailService.sendMailMessageByEmail(emailByTemplateByEmailRequestDto);
+        }
+
+    }
+
+    @PostMapping(value = "/emailByTemplateByUserID")
+    public void EmailByTemplateByUserID(@RequestHeader(value = "sessionOriginPlatformID", required = false) String sessionOriginPlatformID,
+                                       @RequestBody EmailByTemplateByUserIDRequestDto emailByTemplateByUserIDRequestDto) throws MailRequestException {
+
+        if (sessionOriginPlatformID != null) {
+            try {
+                Integer sourceOriginPlatformID = Integer.valueOf(sessionOriginPlatformID);
+                emailByTemplateByUserIDRequestDto.setSourceOriginPlatformID(sourceOriginPlatformID);
+            } catch (NumberFormatException e) {
+                //Do nothing
+            }
+
+            mailService.sendMailMessage(emailByTemplateByUserIDRequestDto);
+        } else {
+
+            mailService.sendMailMessage(emailByTemplateByUserIDRequestDto);
+        }
+
+    }
+
+    @PostMapping(value = "/emailByTemplateByEmail")
+    public void EmailByTemplateByEmail(@RequestHeader(value = "sessionOriginPlatformID", required = false) String sessionOriginPlatformID,
+                                      @RequestBody EmailByTemplateByEmailRequestDto emailByTemplateByEmailRequestDto) throws MailRequestException {
 
         if (sessionOriginPlatformID != null) {
             try {
